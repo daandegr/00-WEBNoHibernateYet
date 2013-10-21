@@ -12,13 +12,12 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import service.HibernateUtil;
 
-
 @WebServlet(name = "GebruikerController", urlPatterns = {"/readall", "/gebruikers"})
 public class GebruikerController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String uri = request.getRequestURI();
 
         int lastIndex = uri.lastIndexOf("/");
@@ -27,7 +26,7 @@ public class GebruikerController extends HttpServlet {
 
         if (action.equals("readall")) {
 
-            List<User> gebruikersLijst = new LinkedList();
+            List<User> gebruikersLijst;
 
             // Zet de session in een variabele
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -39,16 +38,16 @@ public class GebruikerController extends HttpServlet {
             gebruikersLijst = criteria.list();
 
             // Zet de lijst met gebruikers en het totaal aantal gebruikers op het request
-            request.setAttribute("gebruikersUitSessie", gebruikersLijst);
+            request.setAttribute("gebruikersLijst", gebruikersLijst);
             request.setAttribute("aantalGebruikers", gebruikersLijst.size());
 
             dispatchUrl = "gebruikers.jsp";
 
         }
 
+
         if (dispatchUrl != null) {
-            RequestDispatcher rd =
-                    request.getRequestDispatcher(dispatchUrl);
+            RequestDispatcher rd = request.getRequestDispatcher(dispatchUrl);
             rd.forward(request, response);
         }
     }
@@ -58,7 +57,7 @@ public class GebruikerController extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

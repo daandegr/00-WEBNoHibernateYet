@@ -26,7 +26,7 @@
                         </td>
                         <td></td>
                     </tr>
-                <c:forEach var="tempGebruiker" items="${requestScope.gebruikersUitSessie}">
+                <c:forEach var="tempGebruiker" items="${requestScope.gebruikersLijst}">
                         <!-- Per gebruiker wordt nu een rij aangemaakt met daarin zijn gegevens -->
                         <tr>
                             <td>
@@ -39,9 +39,9 @@
                                 ${tempGebruiker.email}
                             </td>
                             <td>
-                                <a href="gebruikers/wijzig?id=${tempGebruiker.userId}">Wijzig</a> |
+                                <a href="http://localhost:8084/MVCWebApp_Hibernate/gebruikers/wijzig?id=${tempGebruiker.userId}">Wijzig</a> |
                                 <a href="javascript:if(confirm('Weet u het zeker dat u deze gebruiker wil verwijderen?'))
-                                   window.location='gebruikers/verwijder?id=${tempGebruiker.userId}';">Verwijder</a>
+                                   window.location='http://localhost:8084/MVCWebApp_Hibernate/gebruikers/verwijder?id=${tempGebruiker.userId}';">Verwijder</a>
                             </td>
                         </tr>
                     </c:forEach>
@@ -53,10 +53,10 @@
             </c:otherwise>
         </c:choose>
         <p>
-            <a href="gebruikers/nieuw">Maak nieuwe gebruiker aan</a>
+            <a href="http://localhost:8084/MVCWebApp_Hibernate/gebruikers/nieuw">Maak nieuwe gebruiker aan</a>
         </p>
         <p>
-            <a href="index">Terug naar de index</a>
+            <a href="http://localhost:8084/MVCWebApp_Hibernate/index">Terug naar de index</a>
         </p>
     </body>
 </html>
