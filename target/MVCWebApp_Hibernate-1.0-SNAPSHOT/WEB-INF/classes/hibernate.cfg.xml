@@ -15,6 +15,7 @@
         <!-- Drop and re-create the database schema on startup (values:create, update, none)  -->
         <property name="hbm2ddl.auto">update</property>
         <mapping class="models.User"/>
+        <mapping class="models.Product"/>
 
     
     

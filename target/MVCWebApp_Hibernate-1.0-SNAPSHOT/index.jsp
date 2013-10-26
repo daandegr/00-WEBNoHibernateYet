@@ -15,9 +15,11 @@
         <h3>Menu</h3>
         <ul>
             <li>
-                <a href="gebruikers.jsp">Gebruikers</a>
                 <form method="post" action="readall">      
                     <td><input type="submit" value="gebruikers"/></td>
+                </form>
+                <form method="post" action="products">      
+                    <td><input type="submit" value="Producten"/></td>
                 </form>
             </li>
         </ul>

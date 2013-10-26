@@ -21,24 +21,19 @@ public class GebruikerWijzigController extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
         if (request.getParameter("id") != null) {
-            //Als er een id is meegegeven, worden de gegevens van de gebruiker opgehaald.
-            long id = Long.parseLong(request.getParameter("id"));
-            request.setAttribute("id", id); // TODO: why?
+            
+            User user;
 
-            // Haal een sessie object op uit het request
-            HttpSession sessie = request.getSession();
-            LinkedList gebruikers = (LinkedList) sessie.getAttribute("gebruikers"); //Haalt de lijst met gebruikers op en slaat deze op in een LinkedList
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-            for (int i = 0; i < gebruikers.size(); i++) {
-                User tempGebruiker = (User) gebruikers.get(i);
+            session.beginTransaction();
 
-                //Als de gebruiker overeenkomt met het gegeven id, worden de gegevens ingevuld in het formulier.
-                if (tempGebruiker.getUserId() == id) {
-                    request.setAttribute("firstName", tempGebruiker.getFirstName());
-                    request.setAttribute("lastName", tempGebruiker.getLastName());
-                    request.setAttribute("email", tempGebruiker.getEmail());
-                }
-            }
+            user = (User) HibernateUtil.getSessionFactory().getCurrentSession().get(User.class, Long.parseLong(request.getParameter("id")));
+
+            request.setAttribute("firstName", user.getFirstName());
+            request.setAttribute("lastName", user.getLastName());
+            request.setAttribute("email", user.getEmail());
+
             doorsturen(request, response, titelWijzig); //Stuurt door naar de Wijzig gebruiker pagina.
         } else {
             doorsturen(request, response, titelNieuw); //Stuurt door naar de Nieuwe gebruiker pagina.
@@ -82,20 +77,20 @@ public class GebruikerWijzigController extends HttpServlet {
 //                    tempGebruiker.setEmail(formUser.getEmail());
 //                }
 //            }
-            
+
             long userId = Long.parseLong(request.getParameter("id"));
-           
-           Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-           Transaction tx = session.beginTransaction();
-           User managedUser = (User)session.load(User.class, userId);
-                     
-           managedUser.setFirstName(request.getParameter("firstName"));
-           managedUser.setLastName(request.getParameter("lastName"));
-           managedUser.setEmail(request.getParameter("email"));
-           
-           session.update(managedUser);
-           
-           tx.commit();
+
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            Transaction tx = session.beginTransaction();
+            User managedUser = (User) session.load(User.class, userId);
+
+            managedUser.setFirstName(request.getParameter("firstName"));
+            managedUser.setLastName(request.getParameter("lastName"));
+            managedUser.setEmail(request.getParameter("email"));
+
+            session.update(managedUser);
+
+            tx.commit();
 
         } else {
 //            // Anders zetten we een uniek id op het User object en voegen we 

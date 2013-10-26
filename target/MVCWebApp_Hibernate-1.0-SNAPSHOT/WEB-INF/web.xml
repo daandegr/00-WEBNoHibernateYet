@@ -16,6 +16,14 @@
         <servlet-name>GebruikerVerwijderen</servlet-name>
         <servlet-class>controllers.GebruikerVerwijderController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProductController</servlet-name>
+        <servlet-class>controllers.ProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>products</servlet-name>
+        <servlet-class>controllers.ProductController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GebruikersController</servlet-name>
         <url-pattern>/gebruikers</url-pattern>
@@ -35,6 +43,19 @@
     <servlet-mapping>
         <servlet-name>GebruikerVerwijderen</servlet-name>
         <url-pattern>/gebruikers/verwijder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductController</servlet-name>
+        <url-pattern>/ProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>products</servlet-name>
+        <url-pattern>/products</url-pattern>
+        <url-pattern>/products/new</url-pattern>
+        <url-pattern>/products/update</url-pattern>
+        <url-pattern>/products/create</url-pattern>
+        <url-pattern>/products/doUpdate</url-pattern>
+        <url-pattern>/products/remove</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
